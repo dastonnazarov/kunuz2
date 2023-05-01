@@ -1,0 +1,53 @@
+### Create article
+POST localhost:8081/api/v1/article
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjM1OTMsImlkIjozLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMDA5OTkzLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.qi2ATrpYqdFjqrHpKjphcA--b747Y0QDAiqTQv3FoUms8zyYNxCKABbYvoUCX2sEN6-YppNx4yGm6ExzmYGoKA
+
+
+{
+  "title": "TODAY",
+  "description": "GOOD NEWS",
+  "content": "dsdfsdfsd",
+  "attachId": "a6251325-1619-428e-a290-ecf77fd508e0",
+  "regionId": 2,
+  "categoryId": 1,
+  "articleTypeId": 3
+}
+
+### update article
+POST localhost:8081/api/v1/article/update/986c38c8-6006-4896-ae10-1a6b3394bf74
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjgzNTcsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMDE0NzU3LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.EaQaPDkd1xEQGnmY3v7Bz7Qii-0aEIvJHWH6nPN_AKbUEvxHxcUdkGuO_x2vVHxCwbkhYG9LmvA5ZXJNdIjT8g
+
+{
+  "title": "uuuuuuuuuuuuurrrrrrrrrrr",
+  "description": "iiiiiiiiiiii",
+  "content": "yyyyyyyyyyy",
+  "attachId": "ed04096c-587f-4906-b359-25da64294abb",
+  "regionId": 2,
+  "categoryId": 1,
+  "articleTypeId": 3
+}
+
+
+### delete article
+DELETE localhost:8081/api/v1/article/delete/2fa69cbc-6f5c-4387-be6d-343b09ea0bcd
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjM1OTMsImlkIjozLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMDA5OTkzLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.qi2ATrpYqdFjqrHpKjphcA--b747Y0QDAiqTQv3FoUms8zyYNxCKABbYvoUCX2sEN6-YppNx4yGm6ExzmYGoKA
+Content-Type: application/json
+
+
+### article changeStatus
+POST localhost:8081/api/v1/article/change-status/2fa69cbc-6f5c-4387-be6d-343b09ea0bcd?status=PUBLISHED
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjkxNTgsImlkIjoyLCJyb2xlIjoiUFVCTElTSEVSIiwiZXhwIjoxNjgzMDE1NTU4LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.R5tngrNHcGimPxx3DaW-J6AGLTkzy7Xd4xwXgjTPP9Ve8N4TmyG945vmkltLPGdplt3NJn5J9N0lyp_l3uZe4w
+Content-Type: application/json
+
+
+
+
+### Get 5 article by type id
+GET localhost:8081/api/v1/article/type/1/five
+
+
+### Get 3 article by type id
+GET localhost:8081/api/v1/article/type/3/three
+
