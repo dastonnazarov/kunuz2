@@ -28,7 +28,7 @@ public class RegionController {
         return ResponseEntity.ok(regionService.update(id, regionDto));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Boolean> deleteById(@PathVariable("id") Integer id, @RequestHeader("Authorization") String authorization) {
         JwtDTO jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
         return ResponseEntity.ok(regionService.deleteById(id, jwtDTO.getId()));

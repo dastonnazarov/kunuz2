@@ -1,23 +1,27 @@
+
 ### Create article
 POST localhost:8081/api/v1/article
 Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjM1OTMsImlkIjozLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMDA5OTkzLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.qi2ATrpYqdFjqrHpKjphcA--b747Y0QDAiqTQv3FoUms8zyYNxCKABbYvoUCX2sEN6-YppNx4yGm6ExzmYGoKA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMxMTIyNzEsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMTk4NjcxLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.RQkQrhzrCGkQ2FRku4nGVZErwev6pMtDIWAJLegE3QAwhkIcpy_eTE8f20zxgUB3axdKnbjF6VeIjXHzlixIXA
 
 
 {
-  "title": "TODAY",
-  "description": "GOOD NEWS",
-  "content": "dsdfsdfsd",
+  "title": "ali",
+  "description": "aliyev",
+  "content": "nma gap",
   "attachId": "a6251325-1619-428e-a290-ecf77fd508e0",
-  "regionId": 2,
+  "regionId": 1,
   "categoryId": 1,
-  "articleTypeId": 3
+  "articleTypeId": 3,
+  "viewCount": 23,
+  "tagId": 1,
+  "publishedId": 2
 }
 
 ### update article
-POST localhost:8081/api/v1/article/update/986c38c8-6006-4896-ae10-1a6b3394bf74
+POST localhost:8081/api/v1/article/update/986c38c8-6006-4896-ae10-1a6b 4bf74
 Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjgzNTcsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMDE0NzU3LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.EaQaPDkd1xEQGnmY3v7Bz7Qii-0aEIvJHWH6nPN_AKbUEvxHxcUdkGuO_x2vVHxCwbkhYG9LmvA5ZXJNdIjT8g
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMwMTk0MDQsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMTA1ODA0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IwWmx0i3XMQvHqpywE3E-4QTmLzbAVP2XMq6Gp44g_CXfBjWmyhE4b-RQ597prag5cFWuDhFcXHRNDsjqVp3LQ
 
 {
   "title": "uuuuuuuuuuuuurrrrrrrrrrr",
@@ -26,7 +30,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODI5MjgzNTcsImlkIjoyLCJyb
   "attachId": "ed04096c-587f-4906-b359-25da64294abb",
   "regionId": 2,
   "categoryId": 1,
-  "articleTypeId": 3
+  "articleTypeId": 3,
+  "viewCount": 1
 }
 
 
@@ -48,6 +53,62 @@ Content-Type: application/json
 GET localhost:8081/api/v1/article/type/1/five
 
 
-### Get 3 article by type id
-GET localhost:8081/api/v1/article/type/3/three
+###   Get 3 article by type id
+GET localhost:8081/api/v1/article/type/1/three
+
+
+
+###  Get Last 8 Articles witch id not included in given list  [1,2,3]
+GET localhost:8081/api/v1/article/getLast8notGivenList?id=986c38c8-6006-4896-ae10-1a6b3394bf74,2fa69cbc-6f5c-4387-be6d-343b09ea0bcd
+
+//7
+###  Get Article By Id And Lang (uz,en,ru)
+GET localhost:8081/api/v1/article/byId/lang
+
+//8
+### Get Article By Id And Lang (uz,en,ru)
+GET localhost:8081/api/v1/article/getById/28a82f5a-9d3a-4cf4-93ce-0381e398cf57
+Accept-Language:ru
+
+//9
+###  Get Last 4 Article By Types and except given article id.
+GET localhost:8081/api/v1/article/find4ByIdTypeByIdNative/2
+
+//10
+###  Get 4 most read articles
+GET localhost:8081/api/v1/article/get4MostReadArticle/
+
+//11
+###Get 4 most read articles
+GET localhost:8081/api/v1/article/find4LastByTagId/1
+
+
+//12
+### Get last 5 article by type id and region id
+GET localhost:8081/api/v1/article/get5by-type-region?type=2&region=2
+
+//13
+### Get Article By RegionId Pagination
+GET localhost:8081/api/v1/article/paging?page=1&size=6&id=1
+
+//14
+### Get last 5 article by category id
+GET localhost:8081/api/v1/article/get5byCategory?categoryId=1
+
+
+//15
+### Get Article By Category Key (Pagination)
+GET localhost:8081/api/v1/article/getCategoryIdPaging?page=1&size3&id=1
+
+
+//18
+### Create article filter
+POST localhost:8081/api/v1/article/filter
+Content-Type:  application/json
+
+{
+  "title": "title5",
+  "regionId": 1
+}
+
 

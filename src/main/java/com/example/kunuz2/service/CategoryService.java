@@ -1,7 +1,10 @@
 package com.example.kunuz2.service;
 
+import com.example.kunuz2.dto.attach.AttachDTO;
 import com.example.kunuz2.dto.category.CategoryDTO;
+import com.example.kunuz2.entity.AttachEntity;
 import com.example.kunuz2.entity.CategoryEntity;
+import com.example.kunuz2.enums.LangEnum;
 import com.example.kunuz2.exps.ItemNotFoundException;
 import com.example.kunuz2.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +80,23 @@ public class CategoryService {
             dtoList.add(dto);
         }
         return new PageImpl<CategoryDTO>(dtoList, paging, totalCount);
+    }
+
+    public CategoryDTO getByIdAndLang(Integer id, LangEnum lang) {
+        CategoryEntity entity = get(id);
+        CategoryDTO dto = new CategoryDTO();
+        dto.setId(entity.getId());
+        switch (lang) {
+            case en -> {
+                dto.setNameEng(entity.getNameEng());
+            }
+            case ru -> {
+                dto.setNameRU(entity.getNameRu());
+            }
+            case uz -> {
+                dto.setNameUz(dto.getNameUz());
+            }
+        }
+        return dto;
     }
 }

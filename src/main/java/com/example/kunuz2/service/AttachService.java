@@ -2,6 +2,7 @@ package com.example.kunuz2.service;
 
 import com.example.kunuz2.dto.attach.AttachDTO;
 import com.example.kunuz2.entity.AttachEntity;
+import com.example.kunuz2.enums.LangEnum;
 import com.example.kunuz2.exps.ItemNotFoundException;
 import com.example.kunuz2.repository.AttachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,5 +211,7 @@ public class AttachService {
         dto.setUrl(serverHost + "/api/v1/attach/open/" + attachId);
         return dto;
     }
+
+
 
 }

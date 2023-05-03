@@ -1,0 +1,27 @@
+
+
+### Create article
+POST localhost:8081/api/v1/tag
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMwMTk0MDQsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMTA1ODA0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IwWmx0i3XMQvHqpywE3E-4QTmLzbAVP2XMq6Gp44g_CXfBjWmyhE4b-RQ597prag5cFWuDhFcXHRNDsjqVp3LQ
+Content-Type:  application/json
+
+{
+  "name": "#Toshkent",
+  "moderatorId":8
+}
+
+### update article
+POST localhost:8081/api/v1/tag/update/3
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMwMTk0MDQsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMTA1ODA0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IwWmx0i3XMQvHqpywE3E-4QTmLzbAVP2XMq6Gp44g_CXfBjWmyhE4b-RQ597prag5cFWuDhFcXHRNDsjqVp3LQ
+
+{
+  "name": "#jizzakh",
+  "moderatorId":5
+}
+
+
+### delete article
+DELETE localhost:8081/api/v1/tag/delete/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMwMTk0MDQsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNjgzMTA1ODA0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IwWmx0i3XMQvHqpywE3E-4QTmLzbAVP2XMq6Gp44g_CXfBjWmyhE4b-RQ597prag5cFWuDhFcXHRNDsjqVp3LQ
+Content-Type: application/json

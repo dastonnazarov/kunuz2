@@ -1,7 +1,11 @@
 package com.example.kunuz2.service;
 
+import com.example.kunuz2.dto.article.ArticleFullInfoDTO;
 import com.example.kunuz2.dto.articleType.ArticleTypeDto;
+import com.example.kunuz2.dto.category.CategoryDTO;
 import com.example.kunuz2.entity.ArticleTypeEntity;
+import com.example.kunuz2.entity.CategoryEntity;
+import com.example.kunuz2.enums.LangEnum;
 import com.example.kunuz2.exps.ItemNotFoundException;
 import com.example.kunuz2.repository.ArticleTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +81,23 @@ public class ArticleTypeService {
             dtoList.add(dto);
         }
         return new PageImpl<ArticleTypeDto>(dtoList, paging, totalCount);
+    }
+
+    public ArticleTypeDto getByIdAndLang(Integer id, LangEnum lang) {
+        ArticleTypeEntity entity = get(id);
+        ArticleTypeDto dto = new ArticleTypeDto();
+        dto.setId(entity.getId());
+        switch (lang) {
+            case en -> {
+                dto.setNameEng(entity.getNameEng());
+            }
+            case ru -> {
+                dto.setNameRU(entity.getNameRu());
+            }
+            case uz -> {
+                dto.setNameUz(dto.getNameUz());
+            }
+        }
+        return dto;
     }
 }

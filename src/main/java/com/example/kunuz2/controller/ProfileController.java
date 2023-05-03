@@ -6,6 +6,7 @@ import com.example.kunuz2.enums.ProfileRole;
 import com.example.kunuz2.exps.MethodNotAllowedException;
 import com.example.kunuz2.service.ProfileService;
 import com.example.kunuz2.util.JwtUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/profile")
+@AllArgsConstructor
 public class ProfileController {
     @Autowired
     private ProfileService profileService;

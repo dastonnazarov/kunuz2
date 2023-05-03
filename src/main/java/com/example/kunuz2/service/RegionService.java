@@ -1,7 +1,10 @@
 package com.example.kunuz2.service;
 
+import com.example.kunuz2.dto.category.CategoryDTO;
 import com.example.kunuz2.dto.region.RegionDTO;
+import com.example.kunuz2.entity.CategoryEntity;
 import com.example.kunuz2.entity.RegionEntity;
+import com.example.kunuz2.enums.LangEnum;
 import com.example.kunuz2.exps.ItemNotFoundException;
 import com.example.kunuz2.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +54,6 @@ public class RegionService {
 
     public Boolean deleteById(Integer id, Integer prtId) {
         int effectedRows = regionRepository.updateVisible(id, prtId);
-       /* RegionEntity entity = get(id);
-        entity.setVisible(false);
-        entity.setPrtId(prtId);
-        regionRepository.save(entity);*/
         return true;
     }
 
@@ -83,5 +82,23 @@ public class RegionService {
             return response;
         }
         throw new ItemNotFoundException("ArticleType is empty");
+    }
+
+    public RegionDTO getByIdAndLang(Integer id, LangEnum lang) {
+        RegionEntity entity = get(id);
+        RegionDTO dto = new RegionDTO();
+        dto.setId(entity.getId());
+        switch (lang) {
+            case en -> {
+                dto.setNameEng(entity.getNameEng());
+            }
+            case ru -> {
+                dto.setNameRU(entity.getNameRu());
+            }
+            case uz -> {
+                dto.setNameUz(dto.getNameUz());
+            }
+        }
+        return dto;
     }
 }

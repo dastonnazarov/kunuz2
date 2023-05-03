@@ -1,18 +1,18 @@
 package com.example.kunuz2.dto.article;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 public class ArticleRequestDTO {
+
     @NotNull(message = "title required")
     @Size(max = 225, message = "Title must be between 10 and 225 characters")
     private String title;
@@ -26,8 +26,12 @@ public class ArticleRequestDTO {
     private Integer regionId;
     @NotNull(message = " Category required")
     private Integer categoryId;
+    @NotNull(message = " tag required")
+    private Integer tagId;
     @NotNull(message = " articleType required")
     private Integer articleTypeId;
-//    @NotEmpty(message = "Should provide value")
-//    private List<Integer> typeList;
+    @NotNull(message = " publishedId required")
+    private Integer publishedId;
+    @Column(name = "view_count")
+    private Integer viewCount;
 }
