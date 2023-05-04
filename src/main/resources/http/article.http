@@ -6,16 +6,17 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMxMTIyNzEsImlkIjoyLCJyb
 
 
 {
-  "title": "ali",
-  "description": "aliyev",
-  "content": "nma gap",
+  "title": "new_uz",
+  "description": "dsfsdfsddddddddd",
+  "content": "more read more read....",
   "attachId": "a6251325-1619-428e-a290-ecf77fd508e0",
   "regionId": 1,
   "categoryId": 1,
   "articleTypeId": 3,
   "viewCount": 23,
   "tagId": 1,
-  "publishedId": 2
+  "publishedId": 2,
+  "commentId": 2
 }
 
 ### update article

@@ -52,6 +52,7 @@ public class CategoryService {
     }
 
     public Boolean deleteById(Integer id, Integer prtId) {
+
         categoryRepository.updateVisible(id, prtId);
 //        CategoryEntity entity = get(id);
 //        entity.setVisible(false);

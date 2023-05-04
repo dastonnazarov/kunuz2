@@ -46,4 +46,12 @@ public class ProfileService {
         });
     }
 
+    public ProfileDTO getProfileIdNameSurname(int profileId) {
+        ProfileDTO dto = new ProfileDTO();
+        ProfileEntity entity = get(profileId);
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setSurname(entity.getSurname());
+        return dto;
+    }
 }

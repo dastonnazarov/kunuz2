@@ -20,7 +20,9 @@ Content-Type: application/json
 }
 
 ###  Category delete with id
-DELETE http://localhost:8080/api/v1/category/1
+DELETE http://localhost:8081/api/v1/category/delete/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMxNzkyMzksImlkIjoyLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODMyNjU2MzksImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.qzUkXAcrFl8ustpryJWTuWaDTJulj4tJaMCww2CRZWslA1_a9UzWicI3XkNIqKudbNeS_rGt7Bxucwik0e-3Zw
+
 
 ### Category get all
 GET http://localhost:8080/api/v1/category/list-paging

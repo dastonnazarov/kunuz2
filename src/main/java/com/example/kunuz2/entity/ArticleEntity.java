@@ -95,6 +95,8 @@ public class ArticleEntity {
     @JoinColumn(name = "tag_id", insertable = false, updatable = false)
     private TagEntity tag;
 
+
+
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    private List<TagEntity> tagEntities;
 

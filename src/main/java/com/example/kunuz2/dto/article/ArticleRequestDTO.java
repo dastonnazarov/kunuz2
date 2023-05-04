@@ -32,6 +32,8 @@ public class ArticleRequestDTO {
     private Integer articleTypeId;
     @NotNull(message = " publishedId required")
     private Integer publishedId;
-    @Column(name = "view_count")
+    @NotNull(message = " viewCount required")
     private Integer viewCount;
+    @NotNull(message = " commentId required")
+    private Integer commentId;
 }

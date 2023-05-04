@@ -23,7 +23,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.create(dto, jwtDTO.getId()));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Boolean> update(@PathVariable("id") Integer id,
                                           @RequestBody CategoryDTO categoryDto,
                                           @RequestHeader("Authorization") String authorization) {
@@ -31,7 +31,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.update(id, categoryDto));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> deleteById(@PathVariable("id") Integer id,
                                               @RequestHeader("Authorization") String authorization) {
         JwtDTO jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
