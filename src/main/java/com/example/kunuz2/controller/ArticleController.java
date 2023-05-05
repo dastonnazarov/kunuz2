@@ -21,7 +21,7 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-    @PostMapping("")
+    @PostMapping({"", "/"})
     public ResponseEntity<ArticleRequestDTO> create(@RequestBody @Valid ArticleRequestDTO dto,
                                                     @RequestHeader("Authorization") String authorization) {
         JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR);

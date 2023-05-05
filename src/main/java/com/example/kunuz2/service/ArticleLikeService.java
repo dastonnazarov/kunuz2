@@ -18,14 +18,14 @@ public class ArticleLikeService {
              makeEmotion(articleId,profileId,ArticleLikeStatus.LIKE);
              return true;
       }
-    public Boolean disLike(String articleId,Integer profileId){
+    public Boolean dislike(String articleId,Integer profileId){
         makeEmotion(articleId,profileId,ArticleLikeStatus.DISLIKE);
         return true;
     }
 
 
     public Boolean delete(String articleId,Integer profileId){
-        articleLikeRepository.removeLikeOrDislike(articleId,profileId);
+        articleLikeRepository.deletes(articleId,profileId);
         return true;
     }
       public void makeEmotion(String articleId,Integer profileId,ArticleLikeStatus status){
@@ -37,7 +37,7 @@ public class ArticleLikeService {
               entity.setStatus(status);
               articleLikeRepository.save(entity);
           }else {
-              articleLikeRepository.update(articleId,profileId,status);
+              articleLikeRepository.update(status, articleId, profileId);
           }
       }
 
