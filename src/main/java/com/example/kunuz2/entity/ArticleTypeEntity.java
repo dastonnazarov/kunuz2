@@ -26,4 +26,5 @@ public class ArticleTypeEntity {
     private Boolean visible;
     @Column(name = "prt_id")
     private Integer prtId;
+
 }

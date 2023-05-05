@@ -3,10 +3,8 @@ package com.example.kunuz2.entity;
 
 import com.example.kunuz2.enums.ArticleLikeStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,23 +12,29 @@ import java.time.LocalDateTime;
 @Table(name = "article_like")
 @Entity
 public class ArticleLikeEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "profile_id", insertable = false, updatable = false)
-    private Integer profile_id;
+    @Column(name = "profile_id")
+    private Integer profileId;
 
-    @OneToMany
-    @JoinColumn(name = "comment_id", insertable = false, updatable = false)
-    private Integer comment_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id", insertable = false, updatable = false)
+    private ProfileEntity profile;
+
+    @Column(name = "article_id")
+    private String articleId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id", insertable = false, updatable = false)
+    private ArticleEntity article;
 
     @Column(name = "created_date")
-    private LocalDateTime created_date;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private ArticleLikeStatus status;
 
 }

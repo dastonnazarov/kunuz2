@@ -13,14 +13,9 @@ import java.time.LocalDateTime;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ArticleLikeDTO {
-    @NotNull(message = "id required")
-    private Integer id;
     @NotNull(message = "profile_id required")
     private Integer profile_id;
-    @NotNull(message = "comment_id required")
-    private Integer comment_id;
-    @NotNull(message = "created_date required")
-    private LocalDateTime created_date;
-    @NotNull(message = "status required")
-    private ArticleLikeStatus status;
+    @NotNull(message = "article_id required")
+    private String article_id;
+
 }
