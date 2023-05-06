@@ -1,9 +1,7 @@
 package com.example.kunuz2.service;
 
 
-import com.example.kunuz2.entity.ArticleLikeEntity;
 import com.example.kunuz2.entity.CommentLikeEntity;
-import com.example.kunuz2.enums.ArticleLikeStatus;
 import com.example.kunuz2.enums.CommentStatus;
 import com.example.kunuz2.repository.CommentLikeRepository;
 import lombok.AllArgsConstructor;

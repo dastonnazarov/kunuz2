@@ -1,8 +1,8 @@
 
 
--- insert into category(name_uz,name_ru,name_en)
--- values('name_uz','name_ru','name_en');
---
+ insert category
+insert into category(name_uz, name_ru, name_eng) values ('doston_uz', 'doston_ru', 'doston_eng');
+
 -- --  insert category
 -- insert into category(name_uz, name_ru, name_eng) values ('name_uz', 'name_ru', 'name_eng');
 -- -- insert admin

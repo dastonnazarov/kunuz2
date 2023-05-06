@@ -1,5 +1,6 @@
 package com.example.kunuz2.service;
 
+import com.example.kunuz2.dto.articleSave.ArticleSaveResponseDTO;
 import com.example.kunuz2.dto.comment.CommentDTO;
 import com.example.kunuz2.dto.comment.CommentResponseDTO;
 import com.example.kunuz2.dto.profile.ProfileResponseDTO;
@@ -78,4 +79,6 @@ public class CommentService {
         dto.setUpdateDate(mapperDTO.getUpdateDate());
         return dto;
     }
+
+
 }

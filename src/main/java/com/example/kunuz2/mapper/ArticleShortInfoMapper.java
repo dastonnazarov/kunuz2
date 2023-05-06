@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 public interface ArticleShortInfoMapper {
     String getId();
 
+    Integer getASId();
+
+    String getAId();
+
     String getTitle();
 
     String getDescription();

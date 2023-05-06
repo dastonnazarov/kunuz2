@@ -12,6 +12,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class ArticleLikeService {
+
       private final ArticleLikeRepository articleLikeRepository;
 
       public Boolean like(String articleId,Integer profileId){
