@@ -7,6 +7,7 @@ import com.example.kunuz2.dto.jwt.JwtDTO;
 import com.example.kunuz2.enums.ProfileRole;
 import com.example.kunuz2.service.ArticleSaveService;
 import com.example.kunuz2.util.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,17 +24,19 @@ public class ArticleSaveController {
 
     @PostMapping("/save")
     public ResponseEntity<?>articleSave(@RequestBody @Valid ArticleSaveDTO dto,
-                                        @RequestHeader("Authorization")String authorization){
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR,
+                                        HttpServletRequest request){
+    JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR,
                 ProfileRole.ADMIN,ProfileRole.MODERATOR,ProfileRole.USER);
-        return ResponseEntity.ok(articleSaveService.save(dto,jwt.getId()));
+    Integer jwtId = (Integer) request.getAttribute("id");
+        return ResponseEntity.ok(articleSaveService.save(dto,jwtId));
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?>delete(@PathVariable("id")Integer id,
-                                   @RequestHeader("Authorization")String authorization){
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR,
+                                   HttpServletRequest request){
+        JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR,
                 ProfileRole.ADMIN,ProfileRole.MODERATOR,ProfileRole.USER);
-        return ResponseEntity.ok(articleSaveService.delete(id));
+        Integer jwtId = (Integer) request.getAttribute("id");
+        return ResponseEntity.ok(articleSaveService.delete(jwtId));
     }
 
 
