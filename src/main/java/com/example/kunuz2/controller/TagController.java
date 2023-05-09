@@ -5,6 +5,7 @@ import com.example.kunuz2.dto.tag.TagDTO;
 import com.example.kunuz2.enums.ProfileRole;
 import com.example.kunuz2.service.TagService;
 import com.example.kunuz2.util.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,23 +20,26 @@ public class TagController {
 
     @PostMapping("")
     public ResponseEntity<TagDTO> create(@RequestBody @Valid TagDTO dto,
-                                         @RequestHeader("Authorization") String authorization) {
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR);
-        return ResponseEntity.ok(tagService.create(dto, jwt.getId()));
+                                         HttpServletRequest request) {
+        JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR);
+        Integer jwtId = (Integer) request.getAttribute("id");
+        return ResponseEntity.ok(tagService.create(dto, jwtId));
     }
 
     @PostMapping("/update/{id}")
     public ResponseEntity<?> update(@RequestBody TagDTO dto,
-                                                    @RequestHeader("Authorization") String authorization,
+                                                    HttpServletRequest request,
                                                     @PathVariable("id") String articleId) {
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR);
+        JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR);
+        Integer jwtId = (Integer) request.getAttribute("id");
         return ResponseEntity.ok(tagService.update(dto, articleId));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@RequestHeader("Authorization") String authorization,
+    public ResponseEntity<?> delete(HttpServletRequest request,
                                     @PathVariable("id") Integer id) {
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR);
+        JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR);
+        Integer jwtId = (Integer) request.getAttribute("id");
         return ResponseEntity.ok(tagService.deleteById(id));
     }
 

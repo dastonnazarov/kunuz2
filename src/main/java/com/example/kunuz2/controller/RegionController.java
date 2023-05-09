@@ -21,9 +21,10 @@ public class RegionController {
     public ResponseEntity<Integer> create(@RequestBody RegionDTO dto,
                                           HttpServletRequest request) {
      JwtUtil.checkForRequiredRole(request, ProfileRole.ADMIN);
-        Integer jwtId = (Integer) request.getAttribute("id");
+        Integer jwtId = (Integer) request.getAttribute(" id ");
         return ResponseEntity.ok(regionService.create(dto, jwtId));
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Boolean> update(@PathVariable("id") Integer id,
