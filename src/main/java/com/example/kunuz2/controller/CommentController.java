@@ -8,6 +8,7 @@ import com.example.kunuz2.dto.jwt.JwtDTO;
 import com.example.kunuz2.enums.ProfileRole;
 import com.example.kunuz2.service.CommentService;
 import com.example.kunuz2.util.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.http.parser.Authorization;
@@ -24,26 +25,30 @@ public class CommentController {
 
     @PostMapping({"","/create"})
     public ResponseEntity<CommentDTO> create(@RequestBody @Valid CommentDTO dto,
-                                             @RequestHeader("Authorization") String authorization) {
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR,
+                                             HttpServletRequest request) {
+
+        JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR,
                 ProfileRole.USER,ProfileRole.ADMIN,ProfileRole.PUBLISHER);
-        return ResponseEntity.ok(commentService.create(dto, jwt.getId()));
+        Integer jwtId = (Integer) request.getAttribute("id");
+        return ResponseEntity.ok(commentService.create(dto, jwtId));
     }
     @PostMapping("/update/{id}")
     public ResponseEntity<CommentDTO> update(@PathVariable("id") Integer id,
                                              @RequestBody @Valid CommentDTO dto,
-                                             @RequestHeader("Authorization") String authorization) {
-        JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR,
+                                            HttpServletRequest request) {
+        JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR,
                 ProfileRole.USER,ProfileRole.ADMIN,ProfileRole.PUBLISHER);
+        Integer jwtId = (Integer) request.getAttribute("id");
         return ResponseEntity.ok(commentService.update(dto,id));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Boolean> deleteById(@PathVariable("id") Integer id,
-                                              @RequestHeader("Authorization") String authorization) {
-        JwtDTO jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN,
-                ProfileRole.USER,ProfileRole.MODERATOR,ProfileRole.PUBLISHER);
-        return ResponseEntity.ok(commentService.deleteById(id, jwtDTO.getId()));
+                                              HttpServletRequest request) {
+        JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR,
+                ProfileRole.USER,ProfileRole.ADMIN,ProfileRole.PUBLISHER);
+        Integer jwtId = (Integer) request.getAttribute("id");
+        return ResponseEntity.ok(commentService.deleteById(id, jwtId));
     }
 
 
