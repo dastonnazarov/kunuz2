@@ -7,6 +7,7 @@ import com.example.kunuz2.enums.LangEnum;
 import com.example.kunuz2.enums.ProfileRole;
 import com.example.kunuz2.service.ArticleService;
 import com.example.kunuz2.util.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,51 +22,54 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-    @PostMapping({"", "/"})
+    @PostMapping({"/private/create"})
     public ResponseEntity<ArticleRequestDTO> create(@RequestBody @Valid ArticleRequestDTO dto,
-                                                    @RequestHeader("Authorization") String authorization) {
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR);
-        return ResponseEntity.ok(articleService.create(dto, jwt.getId()));
+                                                    HttpServletRequest request) {
+        JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR);
+        Integer prId = (Integer) request.getAttribute("id");
+        return ResponseEntity.ok(articleService.create(dto, prId));
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/private/update/{id}")
     public ResponseEntity<ArticleRequestDTO> update(@RequestBody ArticleRequestDTO dto,
-                                                    @RequestHeader("Authorization") String authorization,
+                                                    HttpServletRequest request,
                                                     @PathVariable("id") String articleId) {
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR);
+        Integer  id = (Integer) request.getAttribute("id");
         return ResponseEntity.ok(articleService.update(dto, articleId));
     }
 
-    @DeleteMapping("/delete{id}")
+    @DeleteMapping("/private/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") String id,
-                                    @RequestHeader("Authorization") String authorization) {
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.MODERATOR, ProfileRole.ADMIN);
+                                    HttpServletRequest request) {
+      JwtUtil.checkForRequiredRole(request, ProfileRole.MODERATOR, ProfileRole.ADMIN);
+        Integer prId = (Integer) request.getAttribute("id");
         return ResponseEntity.ok(articleService.delete(id));
     }
 
-    @PostMapping("/change-status/{id}")
+    @PostMapping("/private/change-status/{id}")
     public ResponseEntity<?> changeStatus(@PathVariable("id") String id,
                                           @RequestParam String status,
-                                          @RequestHeader("Authorization") String authorization) {
-        JwtDTO jwt = JwtUtil.getJwtDTO(authorization, ProfileRole.PUBLISHER);
-        return ResponseEntity.ok(articleService.changeStatus(ArticleStatus.valueOf(status), id, jwt.getId()));
+                                          HttpServletRequest request) {
+       JwtUtil.checkForRequiredRole(request, ProfileRole.PUBLISHER);
+        Integer jwId = (Integer) request.getAttribute("id");
+        return ResponseEntity.ok(articleService.changeStatus(ArticleStatus.valueOf(status), id, jwId));
     }
 
-    @GetMapping("/type/{id}/five")
+    @GetMapping("/public/get5ById/{id}")
     public ResponseEntity<List<ArticleShortInfoDTO>> get5ByTypeId(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(articleService.getLast5ByTypeId(id));
     }
 
 
     //6
-    @GetMapping("/type/{id}/three")
+    @GetMapping("/public/get3ById/{id}")
     public ResponseEntity<List<ArticleShortInfoDTO>> get3ByTypeId(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(articleService.getLast3ByTypeId(id));
     }
 
 
     //7
-    @GetMapping("/getLast8notGivenList")
+    @GetMapping("/public/getLast8notGivenList")
     public ResponseEntity<List<?>> getLast8notGivenList(ArticleGetByTypeRequestDTO dto) {
         return ResponseEntity.ok(articleService.getLast8notGivenList(dto.getIdList()));
     }
@@ -73,7 +77,7 @@ public class ArticleController {
 
     //8 pustoy
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("/public/getById/{id}")
     public ResponseEntity<ArticleFullInfoDTO> getById(@PathVariable("id") String id,
                                                       @RequestHeader(value = "Accept-Language",defaultValue = "uz",
                                                               required = false) LangEnum lang) {
@@ -83,21 +87,21 @@ public class ArticleController {
 
 
     //9
-    @GetMapping("/find4ByIdTypeByIdNative/{id}")
+    @GetMapping("/public/find4ByIdTypeByIdNative/{id}")
     public ResponseEntity<?> find4ByIdTypeByIdNative(@PathVariable("id")String id) {
         return ResponseEntity.ok(articleService.find4ByIdTypeByIdNative(id));
     }
 
 
     //10
-    @GetMapping("/get4MostReadArticle")
+    @GetMapping("/public/get4MostReadArticle")
     public ResponseEntity<?> get4MostReadArticle() {
         return ResponseEntity.ok(articleService.get4MostReadArticle());
     }
 
     //11
 
-    @GetMapping("find4LastByTagId")
+    @GetMapping("/public/find4LastByTagId")
     public ResponseEntity<?> find4LastByTagId(@PathVariable("id")Integer id){
         return ResponseEntity.ok(articleService.find4LastByTagId(id));
     }
@@ -105,14 +109,14 @@ public class ArticleController {
 
 
     //12
-    @GetMapping("/get5by-type-region")
+    @GetMapping("/public/get5by-type-region")
     public ResponseEntity<List<ArticleShortInfoDTO>> get5ByTypeAndRegion(@RequestParam("type") Integer typeId, @RequestParam("region") Integer regionId){
         return ResponseEntity.ok((articleService.get5ByTypeAndReg(typeId, regionId)));
     }
 
 
     //13
-    @GetMapping(value = "/paging")
+    @GetMapping(value = "/public/paging")
     public ResponseEntity<Page<ArticleShortInfoDTO>> paging(@RequestParam(value = "page", defaultValue = "1") int page,
                                                             @RequestParam(value = "size", defaultValue = "30") int size,
                                                             @RequestParam(value = "id") Integer id) {
@@ -120,14 +124,14 @@ public class ArticleController {
     }
 
     //14
-    @GetMapping("/get5byCategory")
+    @GetMapping("/public/get5byCategory")
     public ResponseEntity<List<ArticleShortInfoDTO>> get5ByCategory(@RequestParam("categoryId") Integer categoryId){
         return ResponseEntity.ok(articleService.get5ByCategory(categoryId));
     }
 
 
     //15
-    @GetMapping("/getCategoryIdPaging")
+    @GetMapping("/public/getCategoryIdPaging")
     public ResponseEntity<?> categoryIdPaging(@RequestParam(value = "page",defaultValue = "1")int page,
                                               @RequestParam(value = "size",defaultValue = "10")int size,
                                               @RequestParam(value = "id")Integer id){
@@ -136,7 +140,7 @@ public class ArticleController {
 
 
 
-    @PostMapping("/filter")
+    @PostMapping("/public/filter")
     public ResponseEntity<Page<ArticleShortInfoDTO>> filter(@RequestBody ArticleFilterDTO dto,
                                                             @RequestParam(value = "page", defaultValue = "1") int page,
                                                             @RequestParam(value = "size", defaultValue = "10") int size) {

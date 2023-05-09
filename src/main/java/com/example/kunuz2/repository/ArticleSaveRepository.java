@@ -23,5 +23,9 @@ public interface ArticleSaveRepository extends CrudRepository<ArticleSaveEntity,
 
 
 
-    List<ArticleSaveMapper> getArticleSaveList(Integer id);
+   /* @Modifying
+    @Transactional
+    @Query("SELECT a.id,a.title,a.description,a.attach_id,a.published_date "+
+            " FROM article AS a inner  join attach as at on a.attach_id=at.id where a.id=:id ")
+   List<ArticleSaveMapper> getArticleSaveList(@Param("id") Integer id);*/
 }

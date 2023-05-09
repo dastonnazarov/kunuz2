@@ -34,7 +34,7 @@ public class ArticleSaveService {
     }
 
 
-    public List<ArticleSaveResponseDTO> getSaveArticleList(Integer id) {
+    /*public List<ArticleSaveResponseDTO> getSaveArticleList(Integer id) {
         List<ArticleSaveMapper> entityList = articleSaveRepository.getArticleSaveList(id);
         List<ArticleSaveResponseDTO> dtoList = new LinkedList<>();
 
@@ -43,14 +43,14 @@ public class ArticleSaveService {
         });
         return dtoList;
     }
+*/
 
 
-
-    public ArticleSaveResponseDTO toArticleShortInfo(ArticleSaveMapper entity) {
+   /* public ArticleSaveResponseDTO toArticleShortInfo(ArticleSaveMapper entity) {
         ArticleSaveResponseDTO dto = new ArticleSaveResponseDTO();
-       // dto.setId(entity.getASId());
-     //   dto.setArticleEntity(entity.getAId(),entity.getTitle(),entity.getDescription());
+        dto.setId(entity.getId());
+        dto.setArticleEntity(entity.getId(),entity.getTitle(),entity.getDescription());
         dto.setAttach(attachService.getAttachLink(entity.getAttachId()));
         return dto;
-    }
+    }*/
 }

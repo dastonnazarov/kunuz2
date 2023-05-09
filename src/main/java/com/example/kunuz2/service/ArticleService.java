@@ -35,7 +35,6 @@ public class ArticleService {
     private final RegionService regionService;
     private final ArticleTypeService articleTypeService;
     private final ArticleCustomRepository articleCustomRepository;
-
     public ArticleRequestDTO create(ArticleRequestDTO dto, Integer moderId) {
 
         //getTitle(dto.getTitle());
@@ -53,6 +52,7 @@ public class ArticleService {
         entity.setPublisherId(dto.getPublishedId());
         entity.setPublishedDate(LocalDateTime.now());
         articleRepository.save(entity);
+        dto.setId(entity.getId());
         return dto;
     }
 

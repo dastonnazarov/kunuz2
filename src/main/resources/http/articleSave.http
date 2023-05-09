@@ -15,3 +15,10 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMzNzQzNjEsImlkIjoxLCJyb
 DELETE localhost:8080/api/v1/article_save/delete/3
 Content-Type:  application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMzNzQzNjEsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODM0NjA3NjEsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.kxUF4zghiAQ5S2i-k1ogg5A3-3Lk98j3J9jxTIR8yzrzdmxhUMed_s0L2v_BhcBNrPgiQgqJ4pv8eioXBhPhyg
+
+
+
+### delete article_save
+GET localhost:8080/api/v1/article_save/getList/1
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODMzNzQzNjEsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODM0NjA3NjEsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.kxUF4zghiAQ5S2i-k1ogg5A3-3Lk98j3J9jxTIR8yzrzdmxhUMed_s0L2v_BhcBNrPgiQgqJ4pv8eioXBhPhyg

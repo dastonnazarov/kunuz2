@@ -37,8 +37,8 @@ public class ArticleSaveController {
     }
 
 
-    @GetMapping("/getList")
-    public ResponseEntity<List<ArticleSaveResponseDTO>> getCommentList(@RequestParam("id") Integer id ) {
+   /* @GetMapping("/getList/{id}")
+    public ResponseEntity<List<ArticleSaveResponseDTO>> getCommentList(@PathVariable("id") Integer id ) {
        return ResponseEntity.ok(articleSaveService.getSaveArticleList(id));
-    }
+    }*/
 }

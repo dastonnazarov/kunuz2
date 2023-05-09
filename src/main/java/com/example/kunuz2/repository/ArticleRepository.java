@@ -30,7 +30,7 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
     @Query("update  ArticleEntity  set status = :status where id =:id")
     int changeStatus(@Param("status") ArticleStatus status, @Param("id") String id);
 
-    // 5 - option
+    // 5 - option1
 /*    List<ArticleEntity> findTop5ByTypeIdAndStatusAndVisibleOrderByCreatedDateDesc(Integer typeId,
                                                                                   ArticleStatus status,
                                                                                   Boolean visible);
@@ -39,6 +39,7 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
     where status =:status and visible = true and typeId =:typeId order by createdDate desc limit 5")
     List<ArticleEntity> find5ByTypeId(@Param("typeId") Integer typeId, @Param("status") ArticleStatus status);*/
 
+    // 5- option2
     @Query(value = "SELECT a.id,a.title,a.description,a.attach_id,a.published_date " +
             " FROM article AS a  where  a.type_id =:typeId and status =:status order by created_date desc Limit :limit",
             nativeQuery = true)
@@ -62,37 +63,37 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
                                                      @Param("status") String status,
                                                      @Param("limit") int limit);
 
-    //7
+       // 7 - option1
 //    @Query("select new ArticeEntity(id,title,description,attachId,publishedDate) " +
 //            " Where  status =:status and visible = true and id not in :idList " +
 //            " order by createDate desc limit 8")
 //    List<ArticleShortInfoMapper> find8ByArticleIdNative(@Param("gId") List<String> idList,
 //                                                        @Param("status") ArticleStatus status);
-
+       // 7 - option2
     @Query("SELECT new ArticleEntity(id,title,description,attachId,publishedDate) From ArticleEntity " +
             "where status =:status and visible = true and id not in :idList " +
             " order by createdDate desc limit 8")
     List<ArticleEntity> find8ByArticleIdNative(@Param("status") ArticleStatus status,
                                                    @Param("idList") List<String> idList);
 
-    //8
+    //8??????????????
 
 
 
 
-    //9
+    //9 - option
     @Query(value = " select  a.id,a.title,a.description,a.attach_id,a.published_date ,a.created_date " +
             " from article as a inner join  article_type as t on t.id=a.type_id where a.id != :id  order by a.created_date desc limit :limit ", nativeQuery = true)
     List<ArticleShortInfoMapper> find4ByIdTypeByIdNative(@Param("id") String id,
                                                          @Param("limit") int limit);
 
 
-    //10
+    //10 - option
     @Query(value = " select a.id,a.title,a.description,a.attach_id,a.published_date " +
             " from article as a order by a.view_count desc  limit :limit ", nativeQuery = true)
     List<ArticleShortInfoMapper> find4MostRead(@Param("limit") int limit);
 
-    //11
+    //11 - option
     @Query(value = " select  a.id,a.tilte,a.description,a.attach_id,a.published_date "+
    " from article as a inner  join tag as t on t.id = a.tag_id where a.tag_id=:id " +
             " order by  a.creaded_date desc limit :limit ",
@@ -101,21 +102,21 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
                                                  @Param("limit") Integer limit);
 
 
-    //12
+    //12 -option
     @Query("from ArticleEntity where typeId =:typeId and regionId =:regionId order by createdDate limit 5")
     List<ArticleEntity> get5ByTypeAndReg(@Param("typeId") Integer typeId, @Param("regionId") Integer regionId);
 
 
-    //13
+    //13-option
     Page<ArticleEntity> findAllByRegionId(Pageable paging, Integer id);
 
 
-    //14
+    //14-option
     @Query(value = "from ArticleEntity where categoryId =:categoryId order by createdDate limit 5")
     List<ArticleEntity> get5ByCategoryId(@Param("categoryId") Integer categoryId);
 
 
-    //15
+    //15-option
     Page<ArticleEntity> findAllByCategoryId(Pageable pageable, Integer id);
 
 
