@@ -6,6 +6,7 @@ import com.example.kunuz2.enums.ProfileRole;
 import com.example.kunuz2.exps.MethodNotAllowedException;
 import com.example.kunuz2.service.ProfileService;
 import com.example.kunuz2.util.JwtUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,10 @@ public class ProfileController {
 
     @PostMapping({"", "/"})
     public ResponseEntity<ProfileDTO> create(@RequestBody ProfileDTO dto,
-                                             @RequestHeader("Authorization") String authorization) {
-        JwtDTO jwtDTO = JwtUtil.getJwtDTO(authorization, ProfileRole.ADMIN);
-        return ResponseEntity.ok(profileService.create(dto, jwtDTO.getId()));
+                                             HttpServletRequest request) {
+         JwtUtil.checkForRequiredRole(request, ProfileRole.ADMIN);
+        Integer jwtId = (Integer) request.getAttribute("id");
+        return ResponseEntity.ok(profileService.create(dto,jwtId));
     }
 
     @GetMapping("")
